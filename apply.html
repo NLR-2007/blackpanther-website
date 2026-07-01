@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply — BlackPanthers Club</title>
+  <meta name="description" content="Apply to join BlackPanthers Club — India's #1 elite, free startup incubation program. Submit your team details and pitch deck.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="apply.css">
+</head>
+<body>
+
+  <!-- Grain Overlay -->
+  <div class="grain"></div>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">BP</span>
+      <span class="nav-logo-text">BlackPanthers</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#process">Selection</a>
+      <a href="index.html#offerings">Offerings</a>
+      <a href="#apply-form" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about">About</a>
+    <a href="index.html#process">Selection</a>
+    <a href="index.html#offerings">Offerings</a>
+    <a href="#apply-form">Apply Now</a>
+  </div>
+
+  <!-- Hero Banner -->
+  <section class="apply-hero">
+    <canvas id="applyCanvas"></canvas>
+    <div class="apply-hero-overlay"></div>
+    <div class="container">
+      <div class="apply-hero-content">
+        <p class="apply-hero-tag reveal revealed">
+          <span class="hero-tag-diamond"></span>
+          APPLICATION PORTAL
+          <span class="hero-tag-diamond"></span>
+        </p>
+        <h1 class="apply-hero-title">
+          <span class="apply-hero-line reveal revealed" style="transition-delay:0.1s">Enter the</span>
+          <span class="apply-hero-line apply-hero-line--gold reveal revealed" style="transition-delay:0.25s">Arena</span>
+        </h1>
+        <p class="apply-hero-sub reveal revealed" style="transition-delay:0.4s">
+          Your journey to building an empire starts with a single step.<br>
+          Fill in your details. Upload your pitch. Let the gauntlet begin.
+        </p>
+        <div class="apply-hero-scroll reveal revealed" style="transition-delay:0.55s">
+          <svg width="20" height="30" viewBox="0 0 20 30" fill="none">
+            <rect x="1" y="1" width="18" height="28" rx="9" stroke="rgba(201,168,76,0.4)" stroke-width="1"/>
+            <circle class="apply-scroll-dot" cx="10" cy="8" r="2" fill="#c9a84c"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="apply-section" id="apply-form">
+    <div class="container">
+      <div class="apply-wrapper">
+
+        <!-- Left: Info Panel -->
+        <div class="apply-info">
+          <div class="apply-info-inner">
+            <p class="section-label reveal reveal-up">What Happens Next</p>
+            <h2 class="apply-info-heading reveal reveal-up" style="transition-delay:0.1s">The Path<br>Ahead</h2>
+            <div class="apply-steps">
+              <div class="apply-step reveal reveal-left" style="transition-delay:0.15s">
+                <span class="apply-step-num">01</span>
+                <div>
+                  <h4 class="apply-step-title">Submit Application</h4>
+                  <p class="apply-step-desc">Fill in your team details and upload your pitch deck.</p>
+                </div>
+              </div>
+              <div class="apply-step reveal reveal-left" style="transition-delay:0.25s">
+                <span class="apply-step-num">02</span>
+                <div>
+                  <h4 class="apply-step-title">Initial Screening</h4>
+                  <p class="apply-step-desc">Our team reviews your submission within 48 hours.</p>
+                </div>
+              </div>
+              <div class="apply-step reveal reveal-left" style="transition-delay:0.35s">
+                <span class="apply-step-num">03</span>
+                <div>
+                  <h4 class="apply-step-title">The Gauntlet Begins</h4>
+                  <p class="apply-step-desc">Qualified teams enter the 4-round selection process.</p>
+                </div>
+              </div>
+              <div class="apply-step reveal reveal-left" style="transition-delay:0.45s">
+                <span class="apply-step-num">04</span>
+                <div>
+                  <h4 class="apply-step-title">Welcome to the Elite</h4>
+                  <p class="apply-step-desc">Top scorers are inducted into BlackPanthers Club.</p>
+                </div>
+              </div>
+            </div>
+            <div class="apply-info-badge reveal reveal-up" style="transition-delay:0.5s">
+              <span class="apply-info-badge-icon">&#9670;</span>
+              <span>100% Free. Zero Equity. No Strings.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="apply-form-panel">
+          <form class="apply-form" id="applicationForm" novalidate>
+            <div class="apply-form-header reveal reveal-up">
+              <h3 class="apply-form-title">Team Application</h3>
+              <p class="apply-form-subtitle">All fields are required unless marked optional</p>
+            </div>
+
+            <!-- Team / Company Name -->
+            <div class="form-group reveal reveal-up" style="transition-delay:0.05s">
+              <div class="form-field">
+                <input type="text" id="teamName" name="teamName" required autocomplete="off" placeholder=" ">
+                <label for="teamName">Team / Company Name</label>
+                <div class="form-field-line"></div>
+              </div>
+            </div>
+
+            <!-- Total Teammates -->
+            <div class="form-group reveal reveal-up" style="transition-delay:0.1s">
+              <div class="form-field">
+                <input type="number" id="totalMembers" name="totalMembers" required min="1" max="50" placeholder=" ">
+                <label for="totalMembers">Total Number of Teammates</label>
+                <div class="form-field-line"></div>
+              </div>
+              <p class="form-hint">Enter count and member fields will appear below</p>
+            </div>
+
+            <!-- Dynamic Member Fields -->
+            <div id="membersContainer" class="members-container"></div>
+
+            <!-- Founder Details -->
+            <div class="form-row reveal reveal-up" style="transition-delay:0.15s">
+              <div class="form-group">
+                <div class="form-field">
+                  <input type="text" id="founderName" name="founderName" required autocomplete="off" placeholder=" ">
+                  <label for="founderName">Founder Name</label>
+                  <div class="form-field-line"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-field">
+                  <input type="email" id="founderEmail" name="founderEmail" required placeholder=" ">
+                  <label for="founderEmail">Founder Email</label>
+                  <div class="form-field-line"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team Leader / Co-Founder Toggle -->
+            <div class="form-group reveal reveal-up" style="transition-delay:0.2s">
+              <div class="form-toggle">
+                <label class="form-checkbox">
+                  <input type="checkbox" id="leaderIsCofounder" checked>
+                  <span class="form-checkbox-mark"></span>
+                  <span class="form-checkbox-text">Team Leader is also the Co-Founder</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Team Leader Email (shown when unchecked) -->
+            <div class="form-group form-group--conditional" id="leaderEmailGroup" style="display:none">
+              <div class="form-field">
+                <input type="email" id="leaderEmail" name="leaderEmail" placeholder=" ">
+                <label for="leaderEmail">Team Leader Email</label>
+                <div class="form-field-line"></div>
+              </div>
+            </div>
+
+            <!-- Co-Founder Email (shown when unchecked) -->
+            <div class="form-group form-group--conditional" id="cofounderEmailGroup" style="display:none">
+              <div class="form-field">
+                <input type="email" id="cofounderEmail" name="cofounderEmail" placeholder=" ">
+                <label for="cofounderEmail">Co-Founder Email</label>
+                <div class="form-field-line"></div>
+              </div>
+            </div>
+
+            <!-- PPT Upload -->
+            <div class="form-group reveal reveal-up" style="transition-delay:0.3s">
+              <label class="form-upload-label">Pitch Deck (PPT / PDF)</label>
+              <div class="form-upload" id="uploadZone">
+                <input type="file" id="pitchDeck" name="pitchDeck" accept=".ppt,.pptx,.pdf,.key" required>
+                <div class="form-upload-content">
+                  <div class="form-upload-icon">
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <path d="M24 32V16M24 16L18 22M24 16L30 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 32L8 36C8 38.2091 9.79086 40 12 40L36 40C38.2091 40 40 38.2091 40 36L40 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <p class="form-upload-text">
+                    <span class="form-upload-browse">Browse files</span> or drag & drop
+                  </p>
+                  <p class="form-upload-hint">PPT, PPTX, PDF, or Keynote &middot; Max 25MB</p>
+                </div>
+                <div class="form-upload-selected" id="uploadSelected" style="display:none">
+                  <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span id="uploadFileName"></span>
+                  <button type="button" class="form-upload-remove" id="uploadRemove">&times;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="form-group reveal reveal-up" style="transition-delay:0.35s">
+              <button type="submit" class="btn btn-primary btn-submit">
+                <span>Submit Application</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" width="18" height="18">
+                  <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="form-notice">
+                <div class="form-notice-icon">
+                  <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M12 2L2 22H22L12 2Z" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 10V14M12 17.5V18" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <div>
+                  <p class="form-notice-text">Your application and files will be reviewed by <strong>NLR Group of Companies</strong>. If your team qualifies, you will receive an official email from <strong>nlrgroupofcompany@gmail.com</strong>.</p>
+                  <p class="form-notice-warn">Beware of spam or impersonation &mdash; we will only contact you from the email above. Do not share sensitive information with any other source.</p>
+                </div>
+              </div>
+              <p class="form-disclaimer">By submitting, you agree to participate in the BlackPanthers selection process. We respect your privacy &mdash; your data is safe with us.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="apply-success" id="successModal">
+    <div class="apply-success-backdrop"></div>
+    <div class="apply-success-content">
+      <div class="apply-success-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="38" stroke="#c9a84c" stroke-width="1"/>
+          <path class="apply-success-check" d="M24 40L35 51L56 30" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="apply-success-title">Application Submitted</h3>
+      <p class="apply-success-body">Your application has been received. NLR Group of Companies will review your pitch deck and reach out within 48 hours.</p>
+      <p class="apply-success-note">If qualified, you will receive an email from <strong style="color:var(--gold-light)">nlrgroupofcompany@gmail.com</strong>. Beware of spam &mdash; we will only contact you from this address.</p>
+      <a href="index.html" class="btn btn-primary" style="margin-top:2rem"><span>Back to Home</span></a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">BP</span>
+          <span class="footer-copy">&copy; 2026 BlackPanthers Club. A NLR Group Initiative.</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#about">About</a>
+          <a href="index.html#process">Selection</a>
+          <a href="index.html#offerings">Offerings</a>
+          <a href="#apply-form">Apply</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="apply.js"></script>
+</body>
+</html>
