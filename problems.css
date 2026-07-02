@@ -624,7 +624,188 @@
 
 .ps-modal-actions {
   margin-top: 1.75rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Access Code Modal ---------- */
+.ps-code-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s;
+}
+
+.ps-code-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ps-code-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 6, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.ps-code-panel {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-elevated);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.ps-code-modal.show .ps-code-panel {
+  transform: translateY(0) scale(1);
+}
+
+.ps-code-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.ps-code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.ps-code-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.ps-code-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.ps-code-close:hover {
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+.ps-code-body {
+  padding: 2rem 2rem 2.25rem;
   text-align: center;
+}
+
+.ps-code-icon {
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+  opacity: 0.7;
+}
+
+.ps-code-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.ps-code-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.ps-code-input-wrap {
+  margin-bottom: 0.75rem;
+}
+
+.ps-code-input-wrap input {
+  width: 100%;
+  max-width: 220px;
+  background: rgba(201, 168, 76, 0.04);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  padding: 0.9rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.6em;
+  text-align: center;
+  color: var(--gold-light);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ps-code-input-wrap input::placeholder {
+  color: var(--text-dim);
+  opacity: 0.4;
+  letter-spacing: 0.3em;
+}
+
+.ps-code-input-wrap input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+}
+
+.ps-code-error {
+  font-size: 0.78rem;
+  color: #d68b8b;
+  min-height: 1.3em;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.ps-code-submit {
+  min-width: 160px;
+}
+
+.ps-code-input-wrap input.shake {
+  animation: codeShake 0.5s ease;
+  border-color: #d68b8b;
+}
+
+@keyframes codeShake {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-6px); }
+  30%, 60%, 90% { transform: translateX(6px); }
+}
+
+/* ---------- Solution section in detail modal ---------- */
+.ps-detail-solution {
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.ps-detail-solution p {
+  margin-bottom: 0.75rem;
+}
+
+.ps-detail-solution p:last-child {
+  margin-bottom: 0;
 }
 
 /* ---------- Footer / Pagination ---------- */

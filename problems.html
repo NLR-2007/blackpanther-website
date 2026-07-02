@@ -133,6 +133,33 @@
     </div>
   </section>
 
+  <!-- Access Code Modal -->
+  <div class="ps-code-modal" id="psCodeModal">
+    <div class="ps-code-backdrop" id="psCodeBackdrop"></div>
+    <div class="ps-code-panel">
+      <div class="ps-code-head">
+        <span class="ps-code-eyebrow">Access Required</span>
+        <button class="ps-code-close" id="psCodeClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="ps-code-body">
+        <div class="ps-code-icon">
+          <svg viewBox="0 0 24 24" fill="none" width="48" height="48">
+            <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <h3 class="ps-code-title">Enter Access Code</h3>
+        <p class="ps-code-desc">Problem statement details are restricted. Enter the 6-digit access code to view the full problem statement and solution approach.</p>
+        <div class="ps-code-input-wrap">
+          <input type="text" id="psCodeInput" maxlength="6" pattern="[0-9]*" inputmode="numeric" placeholder="••••••" autocomplete="off">
+        </div>
+        <p class="ps-code-error" id="psCodeError"></p>
+        <button class="btn btn-primary ps-code-submit" id="psCodeSubmit"><span>Unlock</span></button>
+      </div>
+    </div>
+  </div>
+
   <!-- Detail Modal -->
   <div class="ps-modal" id="psModal">
     <div class="ps-modal-backdrop" id="psModalBackdrop"></div>
@@ -147,6 +174,7 @@
         </table>
         <div class="ps-modal-actions">
           <a href="apply.html" class="btn btn-primary"><span>Apply With This Idea</span></a>
+          <button class="btn btn-primary" id="psDownloadPdfBtn"><span>Download PDF</span></button>
         </div>
       </div>
     </div>
@@ -165,12 +193,14 @@
           <a href="index.html#process">Selection</a>
           <a href="index.html#offerings">Offerings</a>
           <a href="apply.html">Apply</a>
+          <a href="legal.html">Legal</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script src="problems.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="problems-page.js"></script>
 </body>
 </html>

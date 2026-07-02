@@ -1,10 +1,13 @@
 /* ============================================
    BLACKPANTHERS CLUB — Problem Statements Page
    SIH-style filterable, paginated table.
+   With access-code gate (762007).
    ============================================ */
 
 (function () {
   'use strict';
+
+  var ACCESS_CODE = '762007';
 
   var SW = 'Software';
   var HW = 'Hardware';
@@ -19,6 +22,7 @@
       t: p.t,
       desc: p.desc,
       detail: p.detail,
+      solution: p.solution || '',
       tags: p.tags || [],
       features: p.features || [],
       how: p.how || []
@@ -87,12 +91,23 @@
     }).join('') + '</div>';
   }
 
+  function solutionHtml(text) {
+    if (!text) return '<span class="ps-detail-muted">Solution approach to be discussed after selection.</span>';
+    var paragraphs = text.split('\n\n').filter(function (p) { return p.trim(); });
+    return '<div class="ps-detail-solution">' +
+      paragraphs.map(function (p) { return '<p>' + p.trim() + '</p>'; }).join('') +
+      '</div>';
+  }
+
   var state = {
     search: '',
     category: 'all',
     theme: 'all',
     perPage: 25,
-    page: 1
+    page: 1,
+    authenticated: false,
+    pendingProblem: null,
+    activeProblem: null
   };
 
   var els = {};
@@ -152,7 +167,7 @@
         '<td class="ps-col-cat" data-label="Category"><span class="ps-badge ps-badge--' + domainClass(p.d) + '">' + shortCat(p.d) + '</span></td>' +
         '<td class="ps-col-theme" data-label="Theme"><span class="ps-theme">' + p.th + '</span></td>' +
         '<td class="ps-col-view" data-label=""><span class="ps-view">View <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td>';
-      tr.addEventListener('click', function () { openModal(p); });
+      tr.addEventListener('click', function () { requestAccess(p); });
       els.body.appendChild(tr);
     });
 
@@ -222,6 +237,46 @@
     window.scrollTo({ top: top, behavior: 'smooth' });
   }
 
+  /* ---------- Access Code Gate ---------- */
+
+  function requestAccess(p) {
+    state.pendingProblem = p;
+    showCodeModal();
+  }
+
+  function showCodeModal() {
+    els.codeInput.value = '';
+    els.codeError.textContent = '';
+    els.codeInput.classList.remove('shake');
+    els.codeModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () { els.codeInput.focus(); }, 300);
+  }
+
+  function closeCodeModal() {
+    els.codeModal.classList.remove('show');
+    document.body.style.overflow = '';
+    state.pendingProblem = null;
+  }
+
+  function submitCode() {
+    var code = els.codeInput.value.trim();
+    if (code === ACCESS_CODE) {
+      state.authenticated = true;
+      var p = state.pendingProblem;
+      closeCodeModal();
+      if (p) {
+        setTimeout(function () { openModal(p); }, 200);
+      }
+    } else {
+      els.codeError.textContent = 'Incorrect access code. Please try again.';
+      els.codeInput.classList.remove('shake');
+      void els.codeInput.offsetWidth;
+      els.codeInput.classList.add('shake');
+      els.codeInput.select();
+    }
+  }
+
   /* ---------- Detail Modal ---------- */
 
   function row(label, valueHtml) {
@@ -229,11 +284,13 @@
   }
 
   function openModal(p) {
+    state.activeProblem = p;
     var dept = p.th + ' Division';
     els.detailBody.innerHTML =
       row('Problem Statement ID', '<span class="ps-detail-id">' + p.id + '</span>') +
       row('Problem Statement Title', '<strong>' + p.t + '</strong>') +
-      row('Description', '<p class="ps-detail-lead">' + (p.detail || p.desc) + '</p>') +
+      row('Detailed Problem Description', '<p class="ps-detail-lead">' + (p.detail || p.desc) + '</p>') +
+      row('Solution Approach', solutionHtml(p.solution)) +
       row('Key Features', listHtml(p.features, 'ps-detail-list')) +
       row('How It Works', howHtml(p.how)) +
       row('Recommended Tech Stack', stackHtml(p.tags)) +
@@ -253,6 +310,206 @@
   function closeModal() {
     els.modal.classList.remove('show');
     document.body.style.overflow = '';
+    state.activeProblem = null;
+  }
+
+  function downloadPdf(p) {
+    if (!window.jspdf) {
+      alert('PDF generation library is still loading. Please try again.');
+      return;
+    }
+
+    var doc = new window.jspdf.jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var pageHeight = doc.internal.pageSize.getHeight();
+    var margin = 20;
+    var contentWidth = pageWidth - (margin * 2);
+    var y = 25;
+
+    function drawWatermark() {
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.setTextColor(244, 242, 238);
+      doc.text('PATENT: NLR GROUP OF COMPANIES', pageWidth / 2, pageHeight / 2, {
+        align: 'center',
+        angle: 315
+      });
+    }
+
+    function drawPageTemplate() {
+      drawWatermark();
+
+      doc.setDrawColor(201, 168, 76);
+      doc.setLineWidth(0.8);
+      doc.line(margin, 15, pageWidth - margin, 15);
+      
+      doc.setFont('Helvetica', 'bold');
+      doc.setFontSize(8);
+      doc.setTextColor(201, 168, 76);
+      doc.text('BLACKPANTHERS CLUB — 2026', margin, 11);
+      
+      doc.setFont('Helvetica', 'normal');
+      doc.setTextColor(120, 120, 120);
+      var subHeaderStr = 'A NLR GROUP INITIATIVE';
+      doc.text(subHeaderStr, pageWidth - margin - doc.getTextWidth(subHeaderStr), 11);
+    }
+
+    function addFooter(pageNum, totalPages) {
+      doc.setFont('Helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(150, 150, 150);
+      doc.text('Patent: NLR GROUP OF COMPANIES', margin, pageHeight - 12);
+      var pageStr = 'Page ' + pageNum + ' of ' + totalPages;
+      doc.text(pageStr, pageWidth - margin - doc.getTextWidth(pageStr), pageHeight - 12);
+    }
+
+    function printText(text, fontSize, style, color, spacingBefore, spacingAfter) {
+      doc.setFont('Helvetica', style || 'normal');
+      doc.setFontSize(fontSize || 10);
+      doc.setTextColor(color.r, color.g, color.b);
+
+      var lines = doc.splitTextToSize(text, contentWidth);
+      var fontHeight = (fontSize * 0.3527);
+      var lineHeight = fontHeight * 1.35;
+      var blockHeight = spacingBefore + fontHeight + (lines.length - 1) * lineHeight + spacingAfter;
+
+      if (y + blockHeight > pageHeight - 22) {
+        doc.addPage();
+        y = 25;
+        drawPageTemplate();
+      }
+
+      y += spacingBefore;
+      for (var i = 0; i < lines.length; i++) {
+        var baseline = y + fontHeight + (i * lineHeight);
+        doc.text(lines[i], margin, baseline);
+      }
+      y += fontHeight + (lines.length - 1) * lineHeight + spacingAfter;
+    }
+
+    function printHeading(text) {
+      printText(text.toUpperCase(), 11, 'bold', { r: 201, g: 168, b: 76 }, 6, 3);
+      doc.setDrawColor(230, 230, 230);
+      doc.setLineWidth(0.2);
+      doc.line(margin, y + 1, pageWidth - margin, y + 1);
+      y += 3;
+    }
+
+    drawPageTemplate();
+
+    printText('PROBLEM STATEMENT SPECIFICATION', 10, 'normal', { r: 120, g: 120, b: 120 }, 5, 2);
+    printText(p.id + ': ' + p.t, 16, 'bold', { r: 20, g: 20, b: 20 }, 2, 8);
+
+    var col1X = margin;
+    var col2X = margin + 85;
+    
+    doc.setDrawColor(201, 168, 76);
+    doc.setFillColor(248, 246, 240);
+    doc.rect(margin, y, contentWidth, 32, 'F');
+    
+    doc.setFont('Helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    
+    doc.text('CATEGORY:', col1X + 5, y + 8);
+    doc.text('THEME:', col1X + 5, y + 16);
+    doc.text('ORGANIZATION:', col1X + 5, y + 24);
+    
+    doc.text('PS ID:', col2X, y + 8);
+    doc.text('DIVISION:', col2X, y + 16);
+    doc.text('STATUS:', col2X, y + 24);
+    
+    doc.setFont('Helvetica', 'normal');
+    doc.setTextColor(40, 40, 40);
+    
+    doc.text(p.d, col1X + 35, y + 8);
+    doc.text(p.th, col1X + 35, y + 16);
+    doc.text('NLR Group of Companies', col1X + 35, y + 24);
+    
+    doc.text(p.id, col2X + 25, y + 8);
+    doc.text(p.th + ' Division', col2X + 25, y + 16);
+    doc.text('Patented / Active', col2X + 25, y + 24);
+
+    y += 38;
+
+    printHeading('Detailed Problem Description');
+    printText(p.detail || p.desc, 10, 'normal', { r: 60, g: 60, b: 60 }, 3, 5);
+
+    if (p.solution) {
+      printHeading('Proposed Solution Approach');
+      var paras = p.solution.split('\n\n');
+      paras.forEach(function (para) {
+        if (para.trim()) {
+          printText(para.trim(), 10, 'normal', { r: 60, g: 60, b: 60 }, 2, 4);
+        }
+      });
+    }
+
+    if (p.features && p.features.length) {
+      printHeading('Key Features & Requirements');
+      p.features.forEach(function (feat) {
+        printText('•  ' + feat, 10, 'normal', { r: 60, g: 60, b: 60 }, 1.5, 1.5);
+      });
+      y += 3;
+    }
+
+    if (p.how && p.how.length) {
+      printHeading('How It Works / Build Flow');
+      p.how.forEach(function (step, index) {
+        printText((index + 1) + '.  ' + step, 10, 'normal', { r: 60, g: 60, b: 60 }, 1.5, 1.5);
+      });
+      y += 3;
+    }
+
+    if (p.tags && p.tags.length) {
+      printHeading('Recommended Tech Stack');
+      var groups = buildStack(p.tags);
+      if (groups.length) {
+        groups.forEach(function (g) {
+          printText(g.label + ': ' + g.items.join(', '), 10, 'normal', { r: 60, g: 60, b: 60 }, 1.5, 1.5);
+        });
+      } else {
+        printText('General-purpose stack', 10, 'normal', { r: 60, g: 60, b: 60 }, 1.5, 1.5);
+      }
+      y += 3;
+    }
+
+    var boxHeight = 22;
+    if (y + boxHeight > pageHeight - 22) {
+      doc.addPage();
+      y = 25;
+      drawPageTemplate();
+    }
+    
+    doc.setDrawColor(180, 50, 50);
+    doc.setLineWidth(0.4);
+    doc.setFillColor(253, 245, 245);
+    doc.rect(margin, y + 4, contentWidth, boxHeight, 'F');
+    doc.rect(margin, y + 4, contentWidth, boxHeight, 'S');
+
+    doc.setFont('Helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(180, 50, 50);
+    doc.text('INTELLECTUAL PROPERTY NOTICE & PATENT CLAIM', margin + 5, y + 10);
+    
+    doc.setFont('Helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(80, 80, 80);
+    doc.text('This problem statement and its referenced solutions are the exclusive intellectual property of the NLR GROUP OF COMPANIES. Authorized for use only by members of the BlackPanthers Club.', margin + 5, y + 15, { maxWidth: contentWidth - 10 });
+
+    var totalPages = doc.internal.getNumberOfPages();
+    for (var i = 1; i <= totalPages; i++) {
+      doc.setPage(i);
+      addFooter(i, totalPages);
+    }
+
+    var cleanTitle = p.t.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    doc.save(p.id + '_' + cleanTitle + '.pdf');
   }
 
   function populateThemes() {
@@ -318,6 +575,14 @@
     els.detailBody = document.getElementById('psDetailBody');
     els.modalScroll = els.modal.querySelector('.ps-modal-scroll');
 
+    // Access code elements
+    els.codeModal = document.getElementById('psCodeModal');
+    els.codeInput = document.getElementById('psCodeInput');
+    els.codeError = document.getElementById('psCodeError');
+    els.codeSubmit = document.getElementById('psCodeSubmit');
+    els.codeClose = document.getElementById('psCodeClose');
+    els.codeBackdrop = document.getElementById('psCodeBackdrop');
+
     if (!els.body) return;
 
     setStats();
@@ -349,10 +614,35 @@
       render();
     });
 
+    // Detail modal events
     document.getElementById('psModalClose').addEventListener('click', closeModal);
     document.getElementById('psModalBackdrop').addEventListener('click', closeModal);
+
+    els.downloadPdfBtn = document.getElementById('psDownloadPdfBtn');
+    if (els.downloadPdfBtn) {
+      els.downloadPdfBtn.addEventListener('click', function () {
+        if (state.activeProblem) {
+          downloadPdf(state.activeProblem);
+        }
+      });
+    }
+
+    // Access code modal events
+    els.codeSubmit.addEventListener('click', submitCode);
+    els.codeClose.addEventListener('click', closeCodeModal);
+    els.codeBackdrop.addEventListener('click', closeCodeModal);
+    els.codeInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') submitCode();
+    });
+
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') {
+        if (els.codeModal.classList.contains('show')) {
+          closeCodeModal();
+        } else {
+          closeModal();
+        }
+      }
     });
   }
 

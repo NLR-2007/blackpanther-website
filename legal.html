@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Policies — BlackPanthers Club</title>
+  <meta name="description" content="Terms and Conditions, Privacy Policy, and Copyright protection notice for BlackPanthers Club, powered by NLR Group of Companies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="problems.css">
+  <style>
+    .legal-section {
+      padding: 10rem 0 8rem;
+      position: relative;
+    }
+    .legal-content {
+      max-width: 850px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      padding: 3.5rem 4rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      position: relative;
+    }
+    .legal-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .legal-nav {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      padding-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .legal-nav-link {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      transition: color 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .legal-nav-link:hover, .legal-nav-link.active {
+      color: var(--gold);
+    }
+    .legal-nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1.35rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+    }
+    .legal-pane {
+      display: none;
+    }
+    .legal-pane.active {
+      display: block;
+      animation: legalFadeIn 0.4s var(--ease-out) both;
+    }
+    @keyframes legalFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .legal-pane h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+    }
+    .legal-pane h4 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin: 2.5rem 0 1rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.75rem;
+    }
+    .legal-pane p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+    .legal-pane ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0 2rem;
+    }
+    .legal-pane ul li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.92rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    .legal-pane ul li::before {
+      content: '◆';
+      position: absolute;
+      left: 0.25rem;
+      top: 0.2rem;
+      color: var(--gold);
+      font-size: 0.55rem;
+    }
+    .warning-callout {
+      border: 1px solid #d68b8b;
+      background: rgba(214, 139, 139, 0.04);
+      padding: 1.75rem 2.25rem;
+      margin: 2.5rem 0;
+      position: relative;
+    }
+    .warning-callout::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #d68b8b;
+    }
+    .warning-callout h5 {
+      color: #e59393;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 0.85rem;
+    }
+    .warning-callout p {
+      margin: 0;
+      color: #e8a7a7;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+    @media (max-width: 768px) {
+      .legal-content {
+        padding: 2rem 2.25rem;
+      }
+      .legal-nav {
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+      }
+      .legal-nav-link.active::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Grain Overlay -->
+  <div class="grain"></div>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">BP</span>
+      <span class="nav-logo-text">BlackPanthers</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#process">Selection</a>
+      <a href="index.html#offerings">Offerings</a>
+      <a href="problems.html">Problems</a>
+      <a href="apply.html" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about">About</a>
+    <a href="index.html#process">Selection</a>
+    <a href="index.html#offerings">Offerings</a>
+    <a href="problems.html">Problems</a>
+    <a href="apply.html">Apply Now</a>
+  </div>
+
+  <!-- Content Section -->
+  <section class="legal-section">
+    <div class="container">
+      <div class="legal-content">
+        
+        <!-- Tabbed Navigation -->
+        <div class="legal-nav">
+          <span class="legal-nav-link active" data-tab="copyright">Copyright &amp; IP Protection</span>
+          <span class="legal-nav-link" data-tab="terms">Terms &amp; Conditions</span>
+          <span class="legal-nav-link" data-tab="privacy">Privacy Policy</span>
+        </div>
+
+        <!-- COPYRIGHT PANE -->
+        <div class="legal-pane active" id="copyright">
+          <h3>Intellectual Property &amp; Copyright Notice</h3>
+          <p>Last Updated: July 2026</p>
+          
+          <p>
+            All information, technical blueprints, architecture, source recommendations, features, workflow diagrams, and challenges published on this portal represent proprietary intellectual assets and trade secrets strictly held under ownership by the <strong>NLR GROUP OF COMPANIES</strong>.
+          </p>
+
+          <div class="warning-callout">
+            <h5>Crucial Notice: Strict Non-Copy Warning</h5>
+            <p>
+              Copying, replicating, scraping, distributing, publishing, or adapting these proprietary problem statements (in whole or in part) on any other website, incubation platform, digital repository, educational forum, or public server without direct, explicit, written authorization from <strong>NLR Group of Companies</strong> is strictly prohibited and constitutes a direct violation of copyright laws.
+            </p>
+          </div>
+
+          <h4>1. Detection &amp; Automated Integrity Audits</h4>
+          <p>
+            NLR Group of Companies actively deploys automated web scrapers, crawler algorithms, and anti-plagiarism scripts across GitHub, public repositories, and competitor websites. These crawlers continuously audit the internet for similarities in wording, structure, metadata coordinates, and conceptual definitions.
+          </p>
+
+          <h4>2. Prosecution &amp; Legal Enforcement Actions</h4>
+          <p>
+            Upon detection of unauthorized replication or hosting of our problem statements or solutions:
+          </p>
+          <ul>
+            <li>Immediate Digital Millennium Copyright Act (DMCA) takedown notices will be submitted to the offending website's hosting providers, domain registrars, and index databases (including Google Search Console).</li>
+            <li>We will initiate formal legal proceedings for civil damages, seeking compensation for intellectual theft, trade secret misappropriation, and copyright infringement to the highest statutory limit permissible by law.</li>
+            <li>All associated individuals, universities, or startup entities will be permanently blacklisted from the BlackPanthers Club, and formal complaints will be forwarded to their respective academic or corporate compliance bodies.</li>
+          </ul>
+
+          <h4>3. No Licensing Granted</h4>
+          <p>
+            Access to this portal is restricted and provided for application screening purposes only. Viewing these materials does not constitute a license, grant of use, or transfer of rights.
+          </p>
+        </div>
+
+        <!-- TERMS & CONDITIONS PANE -->
+        <div class="legal-pane" id="terms">
+          <h3>Terms &amp; Conditions</h3>
+          <p>Last Updated: July 2026</p>
+
+          <p>
+            Welcome to BlackPanthers Club. By accessing our platform, you agree to comply with and be bound by the following Terms &amp; Conditions of service.
+          </p>
+
+          <h4>1. Acceptance of Terms</h4>
+          <p>
+            By entering our website and viewing our restricted challenges, you represent that you have read, understood, and consented to these Terms. If you disagree with any portion of these provisions, you must immediately terminate access.
+          </p>
+
+          <h4>2. Use of Platform</h4>
+          <p>
+            You agree to use this site strictly for legitimate application purposes. You are forbidden from:
+          </p>
+          <ul>
+            <li>Using manual or automatic systems (robots, scrapers) to extract database rows, problem statements, or structural schemas.</li>
+            <li>Bypassing access barriers, reverse-engineering our verification systems, or sharing restricted entry pins (such as the 6-digit access code) with unauthorized external parties.</li>
+            <li>Attempting to disrupt server security, hosting files, or overloading our data transmission pipelines.</li>
+          </ul>
+
+          <h4>3. Governing Law</h4>
+          <p>
+            These terms and any disputes arising out of the use of this portal are governed by and construed in accordance with the laws of India, without regard to conflicts of law principles. Any legal actions must be filed exclusively in courts of competent jurisdiction in India.
+          </p>
+        </div>
+
+        <!-- PRIVACY POLICY PANE -->
+        <div class="legal-pane" id="privacy">
+          <h3>Privacy Policy</h3>
+          <p>Last Updated: July 2026</p>
+
+          <p>
+            Your privacy is of vital importance to the NLR Group of Companies. This policy describes how we collect, store, and utilize submission and interaction logs on our portal.
+          </p>
+
+          <h4>1. Information We Collect</h4>
+          <p>
+            When you interact with the BlackPanthers Club portal or submit an induction application, we collect:
+          </p>
+          <ul>
+            <li>Contact details such as name, email addresses, and phone numbers.</li>
+            <li>Team, startup, and concept pitch deck files.</li>
+            <li>Access logs including timestamp entries and input verification codes to maintain site security.</li>
+          </ul>
+
+          <h4>2. Data Security &amp; Usage</h4>
+          <p>
+            All submitted company pitches and leader details are encrypted and reviewed solely by the NLR Group of Companies evaluation board. We do not sell, rent, or distribute application information to third-party marketing companies. Data is used exclusively to screen candidates for induction.
+          </p>
+
+          <h4>3. Contact Information</h4>
+          <p>
+            For questions about data privacy, legal compliance, or to request deletion of application records, please email our privacy officers at <a href="mailto:nlrgroupofcompany@gmail.com">nlrgroupofcompany@gmail.com</a>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">BP</span>
+          <span class="footer-copy">&copy; 2026 BlackPanthers Club. A NLR Group Initiative.</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#about">About</a>
+          <a href="index.html#process">Selection</a>
+          <a href="index.html#offerings">Offerings</a>
+          <a href="problems.html">Problems</a>
+          <a href="apply.html">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation scroll class
+    window.addEventListener('scroll', function () {
+      var nav = document.getElementById('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      }
+    });
+
+    // Mobile Menu Toggle
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', function () {
+        toggle.classList.toggle('active');
+        menu.classList.toggle('open');
+        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+      });
+      menu.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          toggle.classList.remove('active');
+          menu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Tabs toggle logic
+    var tabLinks = document.querySelectorAll('.legal-nav-link');
+    var panes = document.querySelectorAll('.legal-pane');
+    tabLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        var tabId = link.getAttribute('data-tab');
+        
+        tabLinks.forEach(function (l) { l.classList.remove('active'); });
+        panes.forEach(function (p) { p.classList.remove('active'); });
+        
+        link.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
