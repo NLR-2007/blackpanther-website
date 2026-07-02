@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Statements — BlackPanthers Club</title>
+  <meta name="description" content="Explore 100 real-world problem statements across Software, Hardware, and Hardware+Software domains — curated by BlackPanthers Club, powered by NLR Group of Companies.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="problems.css">
+</head>
+<body>
+
+  <!-- Grain Overlay -->
+  <div class="grain"></div>
+
+  <!-- Navigation -->
+  <nav class="nav scrolled" id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark">BP</span>
+      <span class="nav-logo-text">BlackPanthers</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#process">Selection</a>
+      <a href="index.html#offerings">Offerings</a>
+      <a href="problems.html">Problems</a>
+      <a href="apply.html" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#about">About</a>
+    <a href="index.html#process">Selection</a>
+    <a href="index.html#offerings">Offerings</a>
+    <a href="problems.html">Problems</a>
+    <a href="apply.html">Apply Now</a>
+  </div>
+
+  <!-- Page Header -->
+  <header class="ps-header">
+    <div class="container">
+      <p class="ps-header-tag">
+        <span class="hero-tag-diamond"></span>
+        BLACKPANTHERS &middot; 2026
+        <span class="hero-tag-diamond"></span>
+      </p>
+      <h1 class="ps-header-title">Problem Statements</h1>
+      <p class="ps-header-sub">
+        100 real-world challenges across Software, Hardware, and their intersection.
+        Pick one. Solve it. Prove you belong among the elite.
+      </p>
+      <div class="ps-stats">
+        <div class="ps-stat"><span class="ps-stat-num" id="statTotal">100</span><span class="ps-stat-label">Total</span></div>
+        <div class="ps-stat"><span class="ps-stat-num" id="statSw">0</span><span class="ps-stat-label">Software</span></div>
+        <div class="ps-stat"><span class="ps-stat-num" id="statHw">0</span><span class="ps-stat-label">Hardware</span></div>
+        <div class="ps-stat"><span class="ps-stat-num" id="statHs">0</span><span class="ps-stat-label">HW + SW</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Table Section -->
+  <section class="ps-section">
+    <div class="container">
+
+      <!-- Controls -->
+      <div class="ps-controls">
+        <div class="ps-search">
+          <svg class="ps-search-icon" viewBox="0 0 24 24" fill="none" width="16" height="16">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M21 21L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" id="psSearch" placeholder="Search by title, keyword, or ID...">
+        </div>
+        <div class="ps-selects">
+          <div class="ps-select">
+            <label for="psCategory">Category</label>
+            <select id="psCategory">
+              <option value="all">All Categories</option>
+              <option value="Software">Software</option>
+              <option value="Hardware">Hardware</option>
+              <option value="Hardware + Software">Hardware + Software</option>
+            </select>
+          </div>
+          <div class="ps-select">
+            <label for="psTheme">Theme</label>
+            <select id="psTheme">
+              <option value="all">All Themes</option>
+            </select>
+          </div>
+          <div class="ps-select">
+            <label for="psPerPage">Show</label>
+            <select id="psPerPage">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">All</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="ps-table-wrap">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th class="ps-col-no">#</th>
+              <th class="ps-col-id">PS ID</th>
+              <th class="ps-col-title">Problem Statement</th>
+              <th class="ps-col-cat">Category</th>
+              <th class="ps-col-theme">Theme</th>
+              <th class="ps-col-view"></th>
+            </tr>
+          </thead>
+          <tbody id="psBody"></tbody>
+        </table>
+        <p class="ps-empty" id="psEmpty" style="display:none">No problem statements match your filters.</p>
+      </div>
+
+      <!-- Footer / Pagination -->
+      <div class="ps-footer">
+        <p class="ps-count" id="psCount"></p>
+        <div class="ps-pagination" id="psPagination"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Detail Modal -->
+  <div class="ps-modal" id="psModal">
+    <div class="ps-modal-backdrop" id="psModalBackdrop"></div>
+    <div class="ps-modal-panel" role="dialog" aria-modal="true" aria-labelledby="psModalTitle">
+      <div class="ps-modal-head">
+        <span class="ps-modal-eyebrow">Problem Statement Details</span>
+        <button class="ps-modal-close" id="psModalClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="ps-modal-scroll">
+        <table class="ps-detail">
+          <tbody id="psDetailBody"></tbody>
+        </table>
+        <div class="ps-modal-actions">
+          <a href="apply.html" class="btn btn-primary"><span>Apply With This Idea</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">BP</span>
+          <span class="footer-copy">&copy; 2026 BlackPanthers Club. A NLR Group Initiative.</span>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#about">About</a>
+          <a href="index.html#process">Selection</a>
+          <a href="index.html#offerings">Offerings</a>
+          <a href="apply.html">Apply</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="problems.js"></script>
+  <script src="problems-page.js"></script>
+</body>
+</html>
